@@ -6,7 +6,7 @@ const {query, orderBy,where} = require('firebase/firestore');
 const app=express();
 app.use(express.json());
 
-
+const PORT=process.env.PORT ||3000;
 app.get('/',async (req,res)=>{
         const usersCollection=collection(db,"imageurl");
         const q=query(collection(db,"imageurl"));
@@ -16,5 +16,5 @@ app.get('/',async (req,res)=>{
     
 });
 
-app.listen(3000);
-console.log("Server started");
+app.listen(PORT);
+console.log(`Server started on port ${PORT}`);
