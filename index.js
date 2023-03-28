@@ -1,11 +1,12 @@
 const express=require('express');
 const db=require('./config');
+
 const firebase=require('firebase/app');
 const {getFirestore,collection,getDocs} =require('firebase/firestore/lite');
 const {query, orderBy,where} = require('firebase/firestore');
 const app=express();
 app.use(express.json());
-
+app.use(cors({origin:'*'}));
 const PORT=process.env.PORT ||3000;
 app.get('/',async (req,res)=>{
         const usersCollection=collection(db,"imageurl");
