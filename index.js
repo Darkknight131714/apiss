@@ -1,6 +1,6 @@
 const express=require('express');
 const db=require('./config');
-
+const cors = require('cors');
 const firebase=require('firebase/app');
 const {getFirestore,collection,getDocs} =require('firebase/firestore/lite');
 const {query, orderBy,where} = require('firebase/firestore');
