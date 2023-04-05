@@ -2,18 +2,18 @@ const express = require('express');
 const db = require('./config');
 const cors = require('cors');
 const firebase = require('firebase/app');
-const { getFirestore, getDocs,collection, query, where, onSnapshot } = require('firebase/firestore');
+const { orderBy,collection, query, where, onSnapshot } = require('firebase/firestore');
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: '*' }));
 const PORT = process.env.PORT || 3000;
-const q = query(collection(db, "imageurl"));
+const q = query(collection(db, "imageurl"),orderBy("count","desc"));
 let postList=[];
 
 const stream = onSnapshot(q, (snapshot) => {
   snapshot.docChanges().forEach((change) => {
     if (change.type === "added") {
-        postList.push(change.doc.data());
+        postList.unshift(change.doc.data());
     }
     if (change.type === "modified") {
         for(i=0;i<postList.length;i++){
