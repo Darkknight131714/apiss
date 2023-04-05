@@ -1,5 +1,5 @@
 const firebase = require('firebase/app');
-const {getFirestore} =require('firebase/firestore/lite');
+const {getFirestore} =require('firebase/firestore');
 const firebaseConfig = {
   apiKey: "AIzaSyD2oI9BgVLZ07pgxw8eFyn6M2U012CWnhM",
   authDomain: "image-tutorial-478aa.firebaseapp.com",
