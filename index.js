@@ -2,7 +2,7 @@ const express = require('express');
 const db = require('./config');
 const cors = require('cors');
 const firebase = require('firebase/app');
-const { orderBy,collection, query, where, onSnapshot } = require('firebase/firestore');
+const { getDocs,orderBy,collection, query, where, onSnapshot } = require('firebase/firestore');
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: '*' }));
@@ -34,7 +34,11 @@ const stream = onSnapshot(q, (snapshot) => {
   });
 });
 app.get('/', async (req, res) => {
-        res.send(JSON.parse(JSON.stringify(postList)));
+        const usersCollection=collection(db,"imageurl");
+        const q = query(collection(db, "imageurl"),orderBy("count"));
+        const usersSnapshot=await getDocs(q);
+        const usersList=usersSnapshot.docs.map(doc=>doc.data());
+        res.send(usersList);
 
 });
 
